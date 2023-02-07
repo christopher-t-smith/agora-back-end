@@ -2,12 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
 const mongoose = require('mongoose');
+const cors = require('cors');
 const Post = require('./models/postSchema');
 require('dotenv').config();
 
 const app = express();
 
 app.use(bodyParser.json());
+
+// Use CORS middleware to allow request from origin of localhost:3000
+app.use(cors({ origin: 'http://localhost:3000' }));
 
 mongoose.set('strictQuery', false);
 
@@ -46,12 +50,13 @@ app.post('/api/posts', (req, res) => {
       });
     })
     .catch(err => {
+      console.log("Error:", err);
       res.status(500).json({
         error: err
       });
     });
 });
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+app.listen(8000, () => {
+  console.log("Server running on port 8000");
 });

@@ -9,7 +9,7 @@ const PostSchema = new Schema({
     gifSearch: { type: String }
   },
   body: { type: String},
-  tags: { type: String, required: true },
+  tags: { type: [String], required: true },
 });
 
 // Require either body or media
