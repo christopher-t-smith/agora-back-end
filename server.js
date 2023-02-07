@@ -33,6 +33,8 @@ app.post("/api/posts", (req, res) => {
   }
 
   const newPost = new Post({
+    username: req.body.username,
+    email: req.body.email,
     title: req.body.title,
     media: {
       image: req.body.image || "",
