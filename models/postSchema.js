@@ -7,20 +7,16 @@ const PostSchema = new Schema({
   email: { type: String, required: true },
   title: { type: String, required: true },
   media: {
-    image: { 
-      filename: { type: String },
-      metadata: { type: Object }
-    },
-    gifSearch: { type: String }
+    gifSearch: { type: String },
   },
   body: { type: String},
   tags: { type: [String], required: true },
 });
 
-// Require either body or media
+// Require either body or GIF
 PostSchema.path('body').validate(function(body) {
-    return this.body || this.media.image || this.media.gifSearch;
-  }, 'Body or Media is required');
+    return this.body || this.gifSearch;
+  }, 'Body and/or GIF is required');
 
 // Export model
 module.exports = mongoose.model("Post", PostSchema);
