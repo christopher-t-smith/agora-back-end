@@ -7,7 +7,10 @@ const PostSchema = new Schema({
   email: { type: String, required: true },
   title: { type: String, required: true },
   media: {
-    image: { type: String },
+    image: { 
+      filename: { type: String },
+      metadata: { type: Object }
+    },
     gifSearch: { type: String }
   },
   body: { type: String},
