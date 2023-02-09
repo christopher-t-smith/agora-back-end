@@ -9,7 +9,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const app = express();
 app.use(bodyParser.json());
 
-app.use(cors({ origin: "https://benevolent-cupcake-0248d3.netlify.app/" }));
+app.use(cors({ origin: "https://benevolent-cupcake-0248d3.netlify.app" }));
 
 const PORT = process.env.PORT || 8000;
 
