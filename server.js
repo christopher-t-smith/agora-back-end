@@ -11,6 +11,8 @@ app.use(bodyParser.json());
 
 app.use(cors({ origin: "https://benevolent-cupcake-0248d3.netlify.app/" }));
 
+const PORT = process.env.PORT || 8000;
+
 mongoose.set("strictQuery", false);
 
 const mongoDB = process.env.MONGODB_URI;
@@ -159,5 +161,5 @@ app.post("/chatgpt", async (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`Listening on ${ process.env.PORT }`)
+  console.log(`Listening on ${ PORT }`)
 });
