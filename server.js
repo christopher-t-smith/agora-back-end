@@ -5,9 +5,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const Post = require("./models/postSchema");
 require("dotenv").config();
-
+const { Configuration, OpenAIApi } = require("openai");
 const app = express();
-
 app.use(bodyParser.json());
 
 // Use CORS middleware to allow request from origin of localhost:3000
@@ -16,6 +15,7 @@ app.use(cors({ origin: "http://localhost:3000" }));
 mongoose.set("strictQuery", false);
 
 const mongoDB = process.env.MONGODB_URI;
+console.log(mongoDB);
 
 main().catch((err) => console.log(err));
 
@@ -133,6 +133,29 @@ app.delete("/api/posts/:id", (req, res) => {
         error: "Error deleting post with id " + id,
       });
     });
+});
+
+//OpenAI Configuration
+
+const openAIKey = process.env.OPEN_AI_API_KEY;
+const configuration = new Configuration({
+  organization: "org-l3B18t6h888LtkGbBSFiKguz",
+  apiKey: openAIKey,
+});
+const openai = new OpenAIApi(configuration);
+
+//ChatGPT Server-Side API
+app.post("/chatgpt", async (req, res) => {
+  const { message } = req.body;
+  const response = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: `${message}`,
+    max_tokens: 100,
+    temperature: 0.5,
+  });
+  res.json({
+    message: response.data.choices[0].text,
+  });
 });
 
 app.listen(8000, () => {
