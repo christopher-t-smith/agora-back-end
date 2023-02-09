@@ -9,14 +9,15 @@ const PostSchema = new Schema({
   media: {
     gifSearch: { type: String },
   },
-  body: { type: String},
+  body: { type: String },
   tags: { type: [String], required: true },
+  likes: { type: Number, default: 0 },
 });
 
 // Require either body or GIF
-PostSchema.path('body').validate(function(body) {
-    return this.body || this.gifSearch;
-  }, 'Body and/or GIF is required');
+PostSchema.path("body").validate(function (body) {
+  return this.body || this.gifSearch;
+}, "Body and/or GIF is required");
 
 // Export model
 module.exports = mongoose.model("Post", PostSchema);

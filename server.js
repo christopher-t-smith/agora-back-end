@@ -49,6 +49,7 @@ app.post("/api/posts", async (req, res) => {
     },
     body: req.body.body,
     tags: req.body.tags,
+    likes: req.body.likes,
   });
 
   try {
