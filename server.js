@@ -9,8 +9,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const app = express();
 app.use(bodyParser.json());
 
-// Use CORS middleware to allow request from origin of localhost:3000
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "https://benevolent-cupcake-0248d3.netlify.app/" }));
 
 mongoose.set("strictQuery", false);
 
