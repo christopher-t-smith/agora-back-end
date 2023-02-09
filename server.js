@@ -69,6 +69,8 @@ app.post("/api/posts", async (req, res) => {
 
 // Read Route
 app.get("/api/posts", async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   try {
     const retrievedPosts = await Post.find();
     res.status(200).json({
