@@ -15,7 +15,7 @@ app.use(cors({ origin: "http://localhost:3000" }));
 mongoose.set("strictQuery", false);
 
 const mongoDB = process.env.MONGODB_URI;
-console.log(mongoDB);
+// console.log(mongoDB);
 
 main().catch((err) => console.log(err));
 
@@ -159,6 +159,6 @@ app.post("/chatgpt", async (req, res) => {
   });
 });
 
-app.listen(8000, () => {
-  console.log("Server running on port 8000");
+app.listen(process.env.PORT, () => {
+  console.log(`Listening on ${ process.env.PORT }`)
 });
