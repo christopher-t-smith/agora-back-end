@@ -26,6 +26,8 @@ async function main() {
 
 // Giphy API Endpoint
 app.post("/api/giphy", async (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   const { query } = req.body;
   const results = await getGifs(query);
   res.send({ data: results });
@@ -34,6 +36,8 @@ app.post("/api/giphy", async (req, res) => {
 // Post Route
 app.post("/api/posts", async (req, res) => {
   console.log(req.body);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   if (!req.body.title || !req.body.body || !req.body.tags) {
     return res
       .status(400)
@@ -87,6 +91,8 @@ app.get("/api/posts", async (req, res) => {
 
 // Update post by ID Route
 app.put("/api/posts/:id", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   const id = req.params.id;
   Post.findByIdAndUpdate(id, { $set: req.body }, { new: true })
     .then((post) => {
@@ -114,6 +120,8 @@ app.put("/api/posts/:id", (req, res) => {
 
 // Delete post by ID Route
 app.delete("/api/posts/:id", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   const id = req.params.id;
   Post.findByIdAndRemove(id)
     .then((post) => {
